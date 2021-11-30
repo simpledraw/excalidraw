@@ -1,8 +1,11 @@
 import LanguageDetector from "i18next-browser-languagedetector";
+import { createStore, del, getMany, keys, set } from "idb-keyval";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { trackEvent } from "../analytics";
 import { getDefaultAppState } from "../appState";
 import { ErrorDialog } from "../components/ErrorDialog";
+import { shield } from "../components/icons";
+import { Tooltip } from "../components/Tooltip";
 import { TopErrorBoundary } from "../components/TopErrorBoundary";
 import {
   APP_NAME,
@@ -10,63 +13,55 @@ import {
   STORAGE_KEYS,
   TITLE_TIMEOUT,
   URL_HASH_KEYS,
-  VERSION_TIMEOUT,
+  VERSION_TIMEOUT
 } from "../constants";
 import { loadFromBlob } from "../data/blob";
+import { restoreAppState, RestoredDataState } from "../data/restore";
 import { ImportedDataState } from "../data/types";
+import { newElementWith } from "../element/mutateElement";
+import { isInitializedImageElement } from "../element/typeChecks";
 import {
   ExcalidrawElement,
   FileId,
-  NonDeletedExcalidrawElement,
+  NonDeletedExcalidrawElement
 } from "../element/types";
 import { useCallbackRefState } from "../hooks/useCallbackRefState";
 import { Language, t } from "../i18n";
 import Excalidraw, {
   defaultLang,
-  languages,
+  languages
 } from "../packages/excalidraw/index";
 import {
-  AppState,
-  LibraryItems,
-  ExcalidrawImperativeAPI,
-  BinaryFileData,
-  BinaryFiles,
+  AppState, BinaryFileData,
+  BinaryFiles, ExcalidrawImperativeAPI, LibraryItems
 } from "../types";
 import {
   debounce,
   getVersion,
   preventUnload,
   ResolvablePromise,
-  resolvablePromise,
+  resolvablePromise
 } from "../utils";
 import {
   FIREBASE_STORAGE_PREFIXES,
-  SAVE_TO_LOCAL_STORAGE_TIMEOUT,
+  SAVE_TO_LOCAL_STORAGE_TIMEOUT
 } from "./app_constants";
 import CollabWrapper, {
   CollabAPI,
   CollabContext,
-  CollabContextConsumer,
+  CollabContextConsumer
 } from "./collab/CollabWrapper";
+import { ExportToExcalidrawPlus } from "./components/ExportToExcalidrawPlus";
 import { LanguageList } from "./components/LanguageList";
+import CustomStats from "./CustomStats";
 import { exportToBackend, getCollaborationLinkData, loadScene } from "./data";
+import { loadFilesFromFirebase } from "./data/api";
+import { FileManager, updateStaleImageStatuses } from "./data/FileManager";
 import {
   importFromLocalStorage,
-  saveToLocalStorage,
+  saveToLocalStorage
 } from "./data/localStorage";
-import CustomStats from "./CustomStats";
-import { restoreAppState, RestoredDataState } from "../data/restore";
-import { Tooltip } from "../components/Tooltip";
-import { shield } from "../components/icons";
-
 import "./index.scss";
-import { ExportToExcalidrawPlus } from "./components/ExportToExcalidrawPlus";
-
-import { getMany, set, del, keys, createStore } from "idb-keyval";
-import { FileManager, updateStaleImageStatuses } from "./data/FileManager";
-import { newElementWith } from "../element/mutateElement";
-import { isInitializedImageElement } from "../element/typeChecks";
-import { loadFilesFromFirebase } from "./data/firebase";
 
 const filesStore = createStore("files-db", "files-store");
 
@@ -247,11 +242,11 @@ const initializeScene = async (opts: {
   } else if (scene) {
     return isExternalScene && jsonBackendMatch
       ? {
-          scene,
-          isExternalScene,
-          id: jsonBackendMatch[1],
-          key: jsonBackendMatch[2],
-        }
+        scene,
+        isExternalScene,
+        id: jsonBackendMatch[1],
+        key: jsonBackendMatch[2],
+      }
       : { scene, isExternalScene: false };
   }
   return { scene: null, isExternalScene: false };
