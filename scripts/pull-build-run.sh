@@ -46,7 +46,6 @@ ssh ${server} "cd ${workdir}; docker build . -t ${image}"
 echo "<<<<<<<< build docker image ${image} done..."
 echo
 
-
 echo ">>>>>>>> restart instance - ${name}..."
 ssh ${server} "docker stop ${name}; docker run -d --name ${name} -e NODE_ENV=${env} -e ENV=${env} -p ${port}:80 --rm ${image}"
 
