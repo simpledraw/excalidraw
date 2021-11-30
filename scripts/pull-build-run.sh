@@ -35,7 +35,7 @@ workdir=${rootdir}
 echo "deploy api to ${server} for branch ${branch}"
 
 echo ">>>>>>>> fetch code from branch ${branch} ..."
-ssh ${server} "cd ${workdir}; git checkout master; git branch -D ${branch}; git fetch origin ${branch}:${branch};git checkout ${branch}; git status"
+ssh ${server} "cd ${workdir};git clean -fd; git reset --hard; git checkout master; git branch -D ${branch}; git fetch origin ${branch}:${branch};git checkout ${branch}; git status"
 echo ">>>>>>>> fetch code done..."
 
 image=sampledraw-excalidraw:${version}
