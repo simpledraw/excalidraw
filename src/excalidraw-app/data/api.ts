@@ -2,8 +2,8 @@ import { restoreElements } from "../../data/restore";
 import { getSceneVersion } from "../../element";
 import { ExcalidrawElement, FileId } from "../../element/types";
 import Portal from "../collab/Portal";
-import { BinaryFileData, BinaryFileMetadata, DataURL } from "../../types";
-// import * as request from 'superagent';
+import { BinaryFileData } from "../../types";
+import * as request from "superagent";
 
 const firebaseSceneVersionCache = new WeakMap<SocketIOClient.Socket, number>();
 
@@ -31,23 +31,24 @@ const LOCAL = {
   }
 }
 
-// const API = {
-//   _saveDoc: async (
-//     roomId: string,
-//     elements: readonly ExcalidrawElement[],
-//   ) => {
-//     const url = `${process.env.REACT_APP_DOC_SERVER_URL}/api/doc/save?id=${roomId}`;
-//     await request.post(url).send({content: JSON.stringify(elements)});
-//   },
+const API = {
+  _saveDoc: async (
+    roomId: string,
+    elements: readonly ExcalidrawElement[],
+  ) => {
+    const url = `${process.env.REACT_APP_DOC_SERVER_URL}/api/doc/save?id=${roomId}`;
+    await request.post(url).send({content: JSON.stringify(elements)});
+  },
 
-//   _loadDoc: async (roomId: string): Promise<ExcalidrawElement[]> => {
-//     const url = `${process.env.REACT_APP_DOC_SERVER_URL}/api/doc/load?id=${roomId}`;
-//     const { body } = await request.get(url);
-//     return JSON.parse(body.content || '[]')
-//   }
-// }
+  _loadDoc: async (roomId: string): Promise<ExcalidrawElement[]> => {
+    const url = `${process.env.REACT_APP_DOC_SERVER_URL}/api/doc/load?id=${roomId}`;
+    const { body } = await request.get(url);
+    return JSON.parse(body.doc.content || '[]')
+  }
+}
 
-const IMPL = LOCAL;
+const IMPL = API;
+
 export const isSavedToFirebase = (
   portal: Portal,
   elements: readonly ExcalidrawElement[],
