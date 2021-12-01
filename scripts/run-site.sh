@@ -1,9 +1,9 @@
 #!/bin/bash
-## scp scripts/run.sh root@ly:~
+## scp scripts/run-site.sh root@hz1:~/run-site.sh
 version=""
 port=3000
 env=production
-
+region=hangzhou
 usage() {
 [[ -n $1 ]] && log "$1" ERROR
 cat << EOF
@@ -41,7 +41,7 @@ curl "${webhook}" \
 test "${version}" = "" && usage
 
 image=sampledraw-draw-site:${version}
-image_url=registry-vpc.cn-qingdao.aliyuncs.com/datalet/${image}
+image_url=registry-vpc.cn-${region}.aliyuncs.com/datalet/${image}
 name=sampledraw-draw-site-instance-${port}
 docker pull ${image_url}
 

@@ -4,6 +4,10 @@
 ```
 docker login --username=tb_huan9huan registry.cn-qingdao.aliyuncs.com
 docker login --username=tb_huan9huan registry-vpc.cn-qingdao.aliyuncs.com
+
+docker login --username=tb_huan9huan registry.cn-hangzhou.aliyuncs.com
+docker login --username=tb_huan9huan registry-vpc.cn-hangzhou.aliyuncs.com
+S0crate5
 ```
 
 ----

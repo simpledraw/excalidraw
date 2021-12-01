@@ -14,6 +14,7 @@ EOF
 exit 1
 }
 
+region=hangzhou
 version=""
 PUSH=""
 BUILD="1"
@@ -52,8 +53,8 @@ fi
 if [ "${PUSH}" == "1" ];
 then
 echo ">>>>>>> push to registery ..."
-docker tag ${imageid} registry.cn-qingdao.aliyuncs.com/datalet/${imageid}
-docker push registry.cn-qingdao.aliyuncs.com/datalet/${imageid}
+docker tag ${imageid} registry.cn-${region}.aliyuncs.com/datalet/${imageid}
+docker push registry.cn-${region}.aliyuncs.com/datalet/${imageid}
 echo "<<<<<<< pushed done, please goto server to deploy!"
 else
 echo "no push, use -P to push it"
