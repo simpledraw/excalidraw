@@ -41,7 +41,7 @@ curl "${webhook}" \
 test "${version}" = "" && usage
 
 image=sampledraw-draw-site:${version}
-image_url=registry-vpc.cn-qigndao.aliyuncs.com/datalet/${image}
+image_url=registry-vpc.cn-qingdao.aliyuncs.com/datalet/${image}
 name=sampledraw-draw-site-instance-${port}
 docker pull ${image_url}
 

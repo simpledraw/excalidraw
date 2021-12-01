@@ -2,13 +2,15 @@ FROM node:14-alpine AS build
 
 WORKDIR /opt/node_app
 
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock  ./
 RUN yarn add create-react-app
 RUN yarn --ignore-optional
 
 ARG NODE_ENV=production
 
 COPY . .
+COPY .env.production .
+RUN ls -la .
 RUN yarn build:app:docker
 
 FROM nginx:1.21-alpine

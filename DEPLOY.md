@@ -8,26 +8,20 @@ docker login --username=tb_huan9huan registry-vpc.cn-qingdao.aliyuncs.com
 
 ----
 ## draw site
+## run in local
+```
+docker build . -t test:0.1.2
+docker run -it --rm -p 3000:80 test:0.1.2
+```
+
 ### build and push
 version=0.3
 ```
-docker build . -t draw-site:${version}
-docker run -it --rm -p 3000:80 draw-site:${version}
-
-imageid=draw-site:${version}
-docker tag ${imageid} registry.cn-qingdao.aliyuncs.com/datalet/${imageid}
-docker push registry.cn-qingdao.aliyuncs.com/datalet/${imageid}
+./build.sh -v ${version} -P
 ```
 ### run in remote
 ```
-image=draw-site:${version}
-port=3000
-image_url=registry-vpc.cn-qingdao.aliyuncs.com/datalet/${image}
-name=draw-site-${port}
-docker pull ${image_url}
-docker stop ${name}
-docker run -d --rm --name ${name} -p ${port}:80 ${image_url}
-docker run -it --rm --name ${name} -p ${port}:80 ${image_url} /bin/sh
+./run.sh -v ${version}
 ```
 ----
 ### room deploy
