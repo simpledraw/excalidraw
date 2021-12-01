@@ -30,7 +30,7 @@ const generateRoomId = async () => {
   return bytesToHexString(buffer);
 };
 
-export const SOCKET_SERVER = process.env.REACT_APP_SOCKET_SERVER_URL;
+export const SOCKET_SERVER = process.env.REACT_APP_SOCKET_SERVER_URL || "";
 
 export type EncryptedData = {
   data: ArrayBuffer;
