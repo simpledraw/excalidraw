@@ -29,6 +29,7 @@
     "@types/react": "17.0.35",
     "@types/react-dom": "17.0.11",
     "@types/socket.io-client": "1.4.36",
+    "@types/superagent": "4.1.13",
     "browser-fs-access": "0.21.1",
     "clsx": "1.1.1",
     "fake-indexeddb": "3.1.7",
@@ -52,6 +53,7 @@
     "roughjs": "4.5.0",
     "sass": "1.43.4",
     "socket.io-client": "2.3.1",
+    "superagent": "6.1.0",
     "typescript": "4.5.2"
   },
   "devDependencies": {
@@ -91,7 +93,7 @@
   "private": true,
   "scripts": {
     "build-node": "node ./scripts/build-node.js",
-    "build:app:docker": "REACT_APP_DISABLE_SENTRY=true react-scripts build",
+    "build:app:docker": "NODE_ENV=production REACT_APP_DISABLE_SENTRY=true react-scripts build",
     "build:app": "REACT_APP_GIT_SHA=$VERCEL_GIT_COMMIT_SHA react-scripts build",
     "build:version": "node ./scripts/build-version.js",
     "build": "yarn build:app && yarn build:version",

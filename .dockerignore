@@ -1,5 +1,6 @@
 *
 !.env
+!.env.*
 !.eslintrc.json
 !.npmrc
 !.prettierrc
