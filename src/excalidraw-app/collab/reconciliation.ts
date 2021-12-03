@@ -157,5 +157,10 @@ export const reconcileElements = (
     (element) => !duplicates.has(element),
   );
 
+  console.log("reconsiled elements", {
+    localElements,
+    remoteElements,
+    reconciledElements: ret,
+  });
   return ret as ReconciledElements;
 };
