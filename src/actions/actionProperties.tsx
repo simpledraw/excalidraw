@@ -512,7 +512,7 @@ export const actionChangeFontFamily = register({
       icon: JSX.Element;
     }[] = [
       {
-        value: FONT_FAMILY.Virgil,
+        value: FONT_FAMILY["Hannotate SC"],
         text: t("labels.handDrawn"),
         icon: <FontFamilyHandDrawnIcon theme={appState.theme} />,
       },
