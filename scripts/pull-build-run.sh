@@ -2,7 +2,7 @@
 
 # deploy to server
 env=staging
-server=root@ly
+server=root@hz1
 logdir=/logs/${env}
 
 while getopts "e:" option; do
