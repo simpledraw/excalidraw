@@ -11,12 +11,10 @@ import { HintViewer } from "./HintViewer";
 import { calculateScrollCenter } from "../scene";
 import { SelectedShapeActions, ShapesSwitcher } from "./Actions";
 import { Section } from "./Section";
-import CollabButton from "./CollabButton";
 import { SCROLLBAR_WIDTH, SCROLLBAR_MARGIN } from "../scene/scrollbars";
 import { LockButton } from "./LockButton";
 import { UserList } from "./UserList";
 import { BackgroundPickerAndDarkModeToggle } from "./BackgroundPickerAndDarkModeToggle";
-import { LibraryButton } from "./LibraryButton";
 
 type MobileMenuProps = {
   appState: AppState;
@@ -86,7 +84,7 @@ export const MobileMenu = ({
                   onChange={onLockToggle}
                   title={t("toolBar.lock")}
                 />
-                <LibraryButton appState={appState} setAppState={setAppState} />
+                {/* <LibraryButton appState={appState} setAppState={setAppState} /> */}
               </Stack.Row>
               {libraryMenu}
             </Stack.Col>

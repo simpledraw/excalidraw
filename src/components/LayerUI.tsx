@@ -13,7 +13,6 @@ import { AppProps, AppState, ExcalidrawProps, BinaryFiles } from "../types";
 import { muteFSAbortError } from "../utils";
 import { SelectedShapeActions, ShapesSwitcher, ZoomActions } from "./Actions";
 import { BackgroundPickerAndDarkModeToggle } from "./BackgroundPickerAndDarkModeToggle";
-import CollabButton from "./CollabButton";
 import { ErrorDialog } from "./ErrorDialog";
 import { ExportCB, ImageExportDialog } from "./ImageExportDialog";
 import { FixedSideContainer } from "./FixedSideContainer";
@@ -31,7 +30,6 @@ import { Tooltip } from "./Tooltip";
 import { UserList } from "./UserList";
 import Library from "../data/library";
 import { JSONExportDialog } from "./JSONExportDialog";
-import { LibraryButton } from "./LibraryButton";
 import { isImageFileHandle } from "../data/blob";
 import { LibraryMenu } from "./LibraryMenu";
 
@@ -335,10 +333,10 @@ const LayerUI = ({
                         />
                       </Stack.Row>
                     </Island>
-                    <LibraryButton
+                    {/* <LibraryButton
                       appState={appState}
                       setAppState={setAppState}
-                    />
+                    /> */}
                   </Stack.Row>
                   {libraryMenu}
                 </Stack.Col>
