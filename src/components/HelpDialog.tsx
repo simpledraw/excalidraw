@@ -6,31 +6,14 @@ import { getShortcutKey } from "../utils";
 import "./HelpDialog.scss";
 
 const Header = () => (
-  <div className="HelpDialog--header">
-    <a
-      className="HelpDialog--btn"
-      href="https://github.com/excalidraw/excalidraw#documentation"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {t("helpDialog.documentation")}
-    </a>
-    <a
-      className="HelpDialog--btn"
-      href="https://blog.excalidraw.com"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {t("helpDialog.blog")}
-    </a>
-    <a
-      className="HelpDialog--btn"
-      href="https://github.com/excalidraw/excalidraw/issues"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {t("helpDialog.github")}
-    </a>
+  <div>
+    <h3>
+      声明: 本网站基于 https://excalidraw.com/ 开发, 旨在提供中国大陆的良好体验.
+    </h3>
+    <div>
+      如果非本区域使用者, 请移步
+      <a href="https://excalidraw.com/">excalidraw.com</a>
+    </div>
   </div>
 );
 
