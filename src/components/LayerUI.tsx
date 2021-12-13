@@ -199,14 +199,14 @@ const LayerUI = ({
             {actionManager.renderAction("loadScene")}
             {renderJSONExportDialog()}
             {renderImageExportDialog()}
-            <Separator />
+            {/* <Separator />
             {onCollabButtonClick && (
               <CollabButton
                 isCollaborating={isCollaborating}
                 collaboratorCount={appState.collaborators.size}
                 onClick={onCollabButtonClick}
               />
-            )}
+            )} */}
           </Stack.Row>
           <BackgroundPickerAndDarkModeToggle
             actionManager={actionManager}

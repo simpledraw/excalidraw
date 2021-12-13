@@ -134,13 +134,13 @@ export const MobileMenu = ({
         {actionManager.renderAction("loadScene")}
         {renderJSONExportDialog()}
         {renderImageExportDialog()}
-        {onCollabButtonClick && (
+        {/* {onCollabButtonClick && (
           <CollabButton
             isCollaborating={isCollaborating}
             collaboratorCount={appState.collaborators.size}
             onClick={onCollabButtonClick}
           />
-        )}
+        )} */}
         {
           <BackgroundPickerAndDarkModeToggle
             actionManager={actionManager}

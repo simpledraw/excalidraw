@@ -594,7 +594,7 @@ const ExcalidrawWrapper = () => {
       }
       return (
         <>
-          {renderEncryptedIcon()}
+          {/* {renderEncryptedIcon()} */}
           {/* {renderLanguageList()} */}
         </>
       );
