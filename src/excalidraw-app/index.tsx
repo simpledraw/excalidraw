@@ -13,7 +13,7 @@ import {
   STORAGE_KEYS,
   TITLE_TIMEOUT,
   URL_HASH_KEYS,
-  VERSION_TIMEOUT
+  VERSION_TIMEOUT,
 } from "../constants";
 import { loadFromBlob } from "../data/blob";
 import { restoreAppState, RestoredDataState } from "../data/restore";
@@ -23,33 +23,36 @@ import { isInitializedImageElement } from "../element/typeChecks";
 import {
   ExcalidrawElement,
   FileId,
-  NonDeletedExcalidrawElement
+  NonDeletedExcalidrawElement,
 } from "../element/types";
 import { useCallbackRefState } from "../hooks/useCallbackRefState";
 import { Language, t } from "../i18n";
 import Excalidraw, {
   defaultLang,
-  languages
+  languages,
 } from "../packages/excalidraw/index";
 import {
-  AppState, BinaryFileData,
-  BinaryFiles, ExcalidrawImperativeAPI, LibraryItems
+  AppState,
+  BinaryFileData,
+  BinaryFiles,
+  ExcalidrawImperativeAPI,
+  LibraryItems,
 } from "../types";
 import {
   debounce,
   getVersion,
   preventUnload,
   ResolvablePromise,
-  resolvablePromise
+  resolvablePromise,
 } from "../utils";
 import {
   FIREBASE_STORAGE_PREFIXES,
-  SAVE_TO_LOCAL_STORAGE_TIMEOUT
+  SAVE_TO_LOCAL_STORAGE_TIMEOUT,
 } from "./app_constants";
 import CollabWrapper, {
   CollabAPI,
   CollabContext,
-  CollabContextConsumer
+  CollabContextConsumer,
 } from "./collab/CollabWrapper";
 import { ExportToExcalidrawPlus } from "./components/ExportToExcalidrawPlus";
 import { LanguageList } from "./components/LanguageList";
@@ -59,7 +62,7 @@ import { loadFilesFromFirebase } from "./data/api";
 import { FileManager, updateStaleImageStatuses } from "./data/FileManager";
 import {
   importFromLocalStorage,
-  saveToLocalStorage
+  saveToLocalStorage,
 } from "./data/localStorage";
 import "./index.scss";
 
@@ -242,11 +245,11 @@ const initializeScene = async (opts: {
   } else if (scene) {
     return isExternalScene && jsonBackendMatch
       ? {
-        scene,
-        isExternalScene,
-        id: jsonBackendMatch[1],
-        key: jsonBackendMatch[2],
-      }
+          scene,
+          isExternalScene,
+          id: jsonBackendMatch[1],
+          key: jsonBackendMatch[2],
+        }
       : { scene, isExternalScene: false };
   }
   return { scene: null, isExternalScene: false };
@@ -528,7 +531,6 @@ const ExcalidrawWrapper = () => {
         >
           {/* <GitHubCorner theme={appState.theme} dir={document.dir} /> */}
           {/* FIXME remove after 2021-05-20 */}
-          {PlusLinkJSX}
         </div>
       );
     },
