@@ -571,7 +571,7 @@ const ExcalidrawWrapper = () => {
           >
             <fieldset>
               <legend>{t("labels.language")}</legend>
-              {renderLanguageList()}
+              {/* {renderLanguageList()} */}
             </fieldset>
             {/* FIXME remove after 2021-05-20 */}
             <div
@@ -587,7 +587,7 @@ const ExcalidrawWrapper = () => {
                 borderRadius: 12,
               }}
             >
-              {PlusLinkJSX}
+              {/* {PlusLinkJSX} */}
             </div>
           </div>
         );
@@ -595,7 +595,7 @@ const ExcalidrawWrapper = () => {
       return (
         <>
           {renderEncryptedIcon()}
-          {renderLanguageList()}
+          {/* {renderLanguageList()} */}
         </>
       );
     },
