@@ -31,7 +31,7 @@ done
 
 [ "${version}" == "" ] && usage
 
-imageid=sampledraw-draw-site:${version}
+imageid=simpledraw-draw-site:${version}
 
 echo ">>>>>>> start to build VERSION file"
 COMMIT_ID=$(git rev-parse --verify HEAD)

@@ -38,8 +38,8 @@ echo ">>>>>>>> fetch code from branch ${branch} ..."
 ssh ${server} "cd ${workdir};git clean -fd; git reset --hard; git checkout master; git branch -D ${branch}; git fetch origin ${branch}:${branch};git checkout ${branch}; git status"
 echo ">>>>>>>> fetch code done..."
 
-image=sampledraw-excalidraw:${version}
-name=sampledraw-excalidraw-instance-${port}
+image=simpledraw-excalidraw:${version}
+name=simpledraw-excalidraw-instance-${port}
 
 echo ">>>>>>>> rebuild the docker image - ${image}..."
 ssh ${server} "cd ${workdir}; docker build . -t ${image}"

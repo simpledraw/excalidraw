@@ -1,5 +1,5 @@
 #!/bin/bash
-## scp scripts/run-site.sh root@hz1:~/run-site.sh
+## scp scripts/run-simpledraw-draw.sh root@hz1:~/run-simpledraw-draw.sh
 version=""
 port=3000
 env=production
@@ -40,9 +40,9 @@ curl "${webhook}" \
 
 test "${version}" = "" && usage
 
-image=sampledraw-draw-site:${version}
+image=simpledraw-draw:${version}
 image_url=registry-vpc.cn-${region}.aliyuncs.com/datalet/${image}
-name=sampledraw-draw-site-instance-${port}
+name=simpledraw-draw-instance-${port}
 docker pull ${image_url}
 
 echo ">>> stop old instance - ${name}..."
