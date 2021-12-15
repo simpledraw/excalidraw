@@ -5,9 +5,9 @@ WORKDIR /opt/node_app
 RUN echo "@simpledraw:registry=https://npm.pkg.github.com/" > .npmrc
 RUN echo "//npm.pkg.github.com/:_authToken=$NPM_TOKEN" >> .npmrc
 
-COPY package.json package-lock.json  ./
+COPY *.json  ./
 RUN npm install -g create-react-app
-RUN npm install --ignore-optional
+RUN npm ci --ignore-scripts --production --no-optional
 
 ARG NODE_ENV=production
 
