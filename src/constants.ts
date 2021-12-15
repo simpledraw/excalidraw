@@ -2,7 +2,8 @@ import cssVariables from "./css/variables.module.scss";
 import { AppProps } from "./types";
 import { FontFamilyValues } from "./element/types";
 
-export const APP_NAME = "Excalidraw";
+export const APP_NAME = "DrawDraw";
+export const APP_ID = "yqhweb";
 
 export const DRAGGING_THRESHOLD = 10; // px
 export const LINE_CONFIRM_THRESHOLD = 8; // px
@@ -181,3 +182,11 @@ export const VERSIONS = {
   excalidraw: 2,
   excalidrawLibrary: 2,
 } as const;
+
+//todo: expose into shared lib
+export const COOKIES = {
+  src: {
+    name: `__${APP_ID}_SRC__`,
+    expires: 356, // expire days
+  }
+}

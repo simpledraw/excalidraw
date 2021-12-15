@@ -7,8 +7,13 @@ import * as request from "superagent";
 
 const firebaseSceneVersionCache = new WeakMap<SocketIOClient.Socket, number>();
 
-console.log("process.env as", process.env);
-
+export async function guestInit(
+  src: string,
+): Promise<{ token: string; puid: string }> {
+  const url = `/api/user/init?src=${src}`;
+  const { body } = await request.post(url).send({});
+  return body || undefined;
+}
 const LOCAL = {
   _saveDoc: async (roomId: string, elements: readonly ExcalidrawElement[]) => {
     localStorage.setItem(roomId, JSON.stringify(elements || []));
