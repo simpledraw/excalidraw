@@ -4,6 +4,7 @@ import { FontFamilyValues } from "./element/types";
 
 export const APP_NAME = "DrawDraw";
 export const APP_ID = "yqhweb";
+export const APP_VERSION = "0.1";
 
 export const DRAGGING_THRESHOLD = 10; // px
 export const LINE_CONFIRM_THRESHOLD = 8; // px

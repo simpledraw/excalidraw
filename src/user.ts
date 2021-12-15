@@ -16,7 +16,7 @@ export class Rand {
 
 const newSrcValue = () => {
   const ts = utcTs();
-  return `${APP_ID}_${new Rand(ts).randInt32()}`;
+  return `${APP_ID}_${ts}_${new Rand(ts).randInt32()}`;
 }
 
 export class User {
@@ -30,7 +30,7 @@ export class User {
       Cookies.set(COOKIES.src.name, src, {expires: COOKIES.src.expires, domain: window.location.hostname});
     }
 
-    const { token, puid } = await guestInit(src);
+    const { token, puid } = await guestInit(src, APP_ID);
     this.token = token;
     this.puid = puid;
   }

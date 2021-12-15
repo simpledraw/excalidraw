@@ -4,15 +4,27 @@ import { ExcalidrawElement, FileId } from "../../element/types";
 import Portal from "../collab/Portal";
 import { BinaryFileData } from "../../types";
 import * as request from "superagent";
+import {utcTs} from "../../time";
 
 const firebaseSceneVersionCache = new WeakMap<SocketIOClient.Socket, number>();
 
-export async function guestInit(
-  src: string,
-): Promise<{ token: string; puid: string }> {
-  const url = `/api/user/init?src=${src}`;
-  const { body } = await request.post(url).send({});
-  return body || undefined;
+const apiUrl = (uri: string) => {
+  if(process.env.REACT_APP_API_SERVER_URL) {
+    uri = `${process.env.REACT_APP_API_SERVER_URL}${uri}`
+  }
+  if(!uri.indexOf('?')) {
+    uri += '?';
+  }
+  return `${uri}_=${utcTs()}`
+}
+export async function guestInit( src: string, app: string ): Promise<{ token: string; puid: string }> {
+  const url = apiUrl(`/api/user/init`);
+  try{
+    const { body } = await request.post(url).send({src, app});
+    return body || undefined;
+  }catch(err){
+    throw err;
+  }
 }
 const LOCAL = {
   _saveDoc: async (roomId: string, elements: readonly ExcalidrawElement[]) => {
