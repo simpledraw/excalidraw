@@ -15,3 +15,8 @@ yarn start
 // 可以启动
 
 ```
+
+## DOCKER
+```
+docker build . --build-arg NPM_TOKEN=f8178ebf329f3602b14d328aa4a2737e2fc47f64
+```
