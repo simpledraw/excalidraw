@@ -26,6 +26,7 @@ jobs:
           registry-url: https://npm.pkg.github.com
           always-auth: true
           scope: "@simpledraw"
+
       - name: Install dependencies
         run: npm ci
         env:

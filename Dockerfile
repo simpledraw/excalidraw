@@ -1,6 +1,9 @@
 FROM node:14-alpine AS build
-
+ARG NPM_TOKEN
 WORKDIR /opt/node_app
+
+RUN echo "@simpledraw:registry=https://npm.pkg.github.com/" > .npmrc
+RUN echo "//npm.pkg.github.com/:_authToken=$NPM_TOKEN" >> .npmrc
 
 COPY package.json yarn.lock  ./
 RUN yarn add create-react-app

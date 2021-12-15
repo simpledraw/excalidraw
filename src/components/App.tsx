@@ -150,6 +150,7 @@ import {
   selectGroupsForSelectedElements,
 } from "../groups";
 import History from "../history";
+import { User } from "../user";
 import { defaultLang, getLanguage, languages, setLanguage, t } from "../i18n";
 import {
   CODES,
@@ -286,6 +287,7 @@ class App extends React.Component<AppProps, AppState> {
 
   public files: BinaryFiles = {};
   public imageCache: AppClassProperties["imageCache"] = new Map();
+  user: User;
 
   constructor(props: AppProps) {
     super(props);
@@ -353,6 +355,7 @@ class App extends React.Component<AppProps, AppState> {
     this.scene = new Scene();
     this.library = new Library(this);
     this.history = new History();
+    this.user = new User();
     this.actionManager = new ActionManager(
       this.syncActionResult,
       () => this.state,
@@ -799,6 +802,9 @@ class App extends React.Component<AppProps, AppState> {
   };
 
   public async componentDidMount() {
+    // init the user
+    await this.user.init();
+
     this.excalidrawContainerValue.container =
       this.excalidrawContainerRef.current;
 
