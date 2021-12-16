@@ -14,7 +14,7 @@ done
 
 if [ "${env}" = "staging" ];
 then
-webhook="https://oapi.dingtalk.com/robot/send?access_token=c0932bdb9105735b758983779284391a6c1ff85f1106b13f7c8eaa10d52b1426"
+webhook="https://oapi.dingtalk.com/robot/send?access_token=660224cc307d43d9cf235dddf06cf5e255f0c0cb9a2704c6e14cbe97109539c2"
 port=3000
 else
 echo "unsupport env ${env}"
