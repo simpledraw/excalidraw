@@ -4,7 +4,7 @@ import { ExcalidrawElement, FileId } from "../../element/types";
 import Portal from "../collab/Portal";
 import { BinaryFileData } from "../../types";
 import * as request from "superagent";
-import {utcTs} from "../../time";
+import { TimeUtils } from "@simpledraw/common";
 
 const firebaseSceneVersionCache = new WeakMap<SocketIOClient.Socket, number>();
 
@@ -15,7 +15,7 @@ const apiUrl = (uri: string) => {
   if(!uri.indexOf('?')) {
     uri += '?';
   }
-  return `${uri}_=${utcTs()}`
+  return `${uri}_=${TimeUtils.utcTs()}`
 }
 export async function guestInit( src: string, app: string ): Promise<{ token: string; puid: string }> {
   const url = apiUrl(`/api/user/init`);
@@ -26,26 +26,26 @@ export async function guestInit( src: string, app: string ): Promise<{ token: st
     throw err;
   }
 }
-const LOCAL = {
-  _saveDoc: async (roomId: string, elements: readonly ExcalidrawElement[]) => {
-    localStorage.setItem(roomId, JSON.stringify(elements || []));
-    console.log(`save room ${roomId} to local storage`);
-  },
-  _loadDoc: async (roomId: string): Promise<ExcalidrawElement[]> => {
-    const str = localStorage.getItem(roomId);
-    if (str) {
-      try {
-        const elements = JSON.parse(str);
-        console.log(`load room ${roomId} to local storage`);
-        return elements;
-      } catch (err) {
-        return [];
-      }
-    } else {
-      return [];
-    }
-  },
-};
+// const LOCAL = {
+//   _saveDoc: async (roomId: string, elements: readonly ExcalidrawElement[]) => {
+//     localStorage.setItem(roomId, JSON.stringify(elements || []));
+//     console.log(`save room ${roomId} to local storage`);
+//   },
+//   _loadDoc: async (roomId: string): Promise<ExcalidrawElement[]> => {
+//     const str = localStorage.getItem(roomId);
+//     if (str) {
+//       try {
+//         const elements = JSON.parse(str);
+//         console.log(`load room ${roomId} to local storage`);
+//         return elements;
+//       } catch (err) {
+//         return [];
+//       }
+//     } else {
+//       return [];
+//     }
+//   },
+// };
 
 const API = {
   _saveDoc: async (roomId: string, elements: readonly ExcalidrawElement[]) => {
@@ -107,7 +107,7 @@ export const saveToFirebase = async (
   }
 
   const sceneVersion = getSceneVersion(elements);
-  const didUpdate = await IMPL._saveDoc(roomId, elements);
+  await IMPL._saveDoc(roomId, elements);
   firebaseSceneVersionCache.set(socket, sceneVersion);
   return true;
 };

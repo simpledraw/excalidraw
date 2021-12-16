@@ -11,7 +11,10 @@ const newSrcValue = () => {
 export class User {
   public token?: string;
   public puid?: string;
+  public isReady?: boolean;
+  public lastError?: {message: string};
   public async init() {
+    this.isReady = false;
     // find the src locally
     let src = Cookies.get(Constants.COOKIES.src.name);
     if(!src) {
@@ -19,8 +22,12 @@ export class User {
       Cookies.set(Constants.COOKIES.src.name, src, {expires: Constants.COOKIES.src.expires, domain: window.location.hostname});
     }
 
-    const { token, puid } = await guestInit(src, APP_ID);
-    this.token = token;
-    this.puid = puid;
+    try{
+      const { token, puid } = await guestInit(src, APP_ID);
+      this.token = token;
+      this.puid = puid;
+    }catch(err){
+      this.lastError = {message: (err as any).message};
+    }
   }
 }
