@@ -12,7 +12,7 @@ const apiUrl = (uri: string) => {
   if(process.env.REACT_APP_API_SERVER_URL) {
     uri = `${process.env.REACT_APP_API_SERVER_URL}${uri}`
   }
-  if(!uri.indexOf('?')) {
+  if(uri.indexOf('?') < 0) {
     uri += '?';
   }
   return `${uri}_=${TimeUtils.utcTs()}`
