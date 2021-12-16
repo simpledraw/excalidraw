@@ -3,9 +3,7 @@
 !.env.*
 !.eslintrc.json
 !.prettierrc
-!package.json
 !public/
 !src/
-!tsconfig.json
 !yarn.lock
-!package-lock.json
+!*.json
