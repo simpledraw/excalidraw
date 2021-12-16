@@ -21,9 +21,9 @@ jobs:
           username: "${{ secrets.REGISTRY_USERNAME }}"
           password: "${{ secrets.REGISTRY_PASSWORD }}"
 
-      - name: Build draw image
+      - name: Build Draw App image
         run: docker build . --build-arg NPM_TOKEN=${{secrets.NPM_TOKEN}} --build-arg BRANCH=${{steps.vars.outputs.tag}} --file Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/datalet/simpledraw-draw:${{steps.vars.outputs.tag}}
 
-      - name: Push drawimage
+      - name: Push Draw App image
         run: |-
           docker push registry.cn-hangzhou.aliyuncs.com/datalet/simpledraw-draw:${{steps.vars.outputs.tag}}
