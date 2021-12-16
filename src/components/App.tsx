@@ -802,8 +802,8 @@ class App extends React.Component<AppProps, AppState> {
   };
 
   public async componentDidMount() {
-    // init the user
-    await this.user.init();
+    // async init the user
+    this.user.init();
 
     this.excalidrawContainerValue.container =
       this.excalidrawContainerRef.current;

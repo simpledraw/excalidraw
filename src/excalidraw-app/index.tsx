@@ -4,8 +4,6 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { trackEvent } from "../analytics";
 import { getDefaultAppState } from "../appState";
 import { ErrorDialog } from "../components/ErrorDialog";
-import { shield } from "../components/icons";
-import { Tooltip } from "../components/Tooltip";
 import { TopErrorBoundary } from "../components/TopErrorBoundary";
 import {
   APP_NAME,
@@ -29,7 +27,6 @@ import { useCallbackRefState } from "../hooks/useCallbackRefState";
 import { Language, t } from "../i18n";
 import Excalidraw, {
   defaultLang,
-  languages,
 } from "../packages/excalidraw/index";
 import {
   AppState,
@@ -55,7 +52,6 @@ import CollabWrapper, {
   CollabContextConsumer,
 } from "./collab/CollabWrapper";
 import { ExportToExcalidrawPlus } from "./components/ExportToExcalidrawPlus";
-import { LanguageList } from "./components/LanguageList";
 import CustomStats from "./CustomStats";
 import { exportToBackend, getCollaborationLinkData, loadScene } from "./data";
 import { loadFilesFromFirebase } from "./data/api";
@@ -255,19 +251,6 @@ const initializeScene = async (opts: {
   return { scene: null, isExternalScene: false };
 };
 
-const PlusLinkJSX = (
-  <p style={{ direction: "ltr", unicodeBidi: "embed" }}>
-    Introducing Excalidraw+
-    <br />
-    <a
-      href="https://plus.excalidraw.com/?utm_source=excalidraw&utm_medium=banner&utm_campaign=launch"
-      target="_blank"
-      rel="noreferrer"
-    >
-      Try out now!
-    </a>
-  </p>
-);
 
 const ExcalidrawWrapper = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -275,7 +258,7 @@ const ExcalidrawWrapper = () => {
   if (Array.isArray(currentLangCode)) {
     currentLangCode = currentLangCode[0];
   }
-  const [langCode, setLangCode] = useState(currentLangCode);
+  const [langCode] = useState(currentLangCode);
 
   // initial state
   // ---------------------------------------------------------------------------
@@ -539,27 +522,6 @@ const ExcalidrawWrapper = () => {
 
   const renderFooter = useCallback(
     (isMobile: boolean) => {
-      const renderEncryptedIcon = () => (
-        <a
-          className="encrypted-icon tooltip"
-          href="https://blog.excalidraw.com/end-to-end-encryption/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={t("encrypted.link")}
-        >
-          <Tooltip label={t("encrypted.tooltip")} long={true}>
-            {shield}
-          </Tooltip>
-        </a>
-      );
-
-      const renderLanguageList = () => (
-        <LanguageList
-          onChange={(langCode) => setLangCode(langCode)}
-          languages={languages}
-          currentLangCode={langCode}
-        />
-      );
       if (isMobile) {
         const isTinyDevice = window.innerWidth < 362;
         return (
@@ -599,7 +561,7 @@ const ExcalidrawWrapper = () => {
         </>
       );
     },
-    [langCode],
+    [],
   );
 
   const renderCustomStats = () => {
