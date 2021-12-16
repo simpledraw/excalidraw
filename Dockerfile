@@ -4,15 +4,14 @@ ARG NODE_ENV=production
 WORKDIR /opt/node_app
 
 COPY . .
-COPY .env.production .
-COPY package.json yarn.lock  ./
-RUN yarn global add create-react-app
+COPY package.json package-lock.json  ./
+RUN npm install -g create-react-app
 
 RUN echo "@simpledraw:registry=https://npm.pkg.github.com/" > .npmrc
 RUN echo "//npm.pkg.github.com/:_authToken=$NPM_TOKEN" >> .npmrc
 
-RUN yarn --ignore-optional
-RUN yarn build:app:docker
+RUN npm ci
+RUN npm run build:app:docker
 
 FROM nginx:1.21-alpine
 
