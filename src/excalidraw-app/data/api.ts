@@ -4,7 +4,7 @@ import { ExcalidrawElement, FileId } from "../../element/types";
 import Portal from "../collab/Portal";
 import { BinaryFileData } from "../../types";
 import * as request from "superagent";
-import { TimeUtils } from "@simpledraw/common";
+import { TimeUtils, Event } from "@simpledraw/common";
 
 const firebaseSceneVersionCache = new WeakMap<SocketIOClient.Socket, number>();
 
@@ -24,6 +24,14 @@ export async function guestInit( src: string, app: string ): Promise<{ token: st
     return body || undefined;
   }catch(err){
     throw err;
+  }
+}
+export async function logEvent(event: Event.EventType, params: any) {
+  const url = apiUrl(`/api/user/event`);
+  try{
+    await request.post(url).send({event, params});
+  }catch(err){
+    console.log('fail to log event', err);
   }
 }
 // const LOCAL = {
