@@ -229,6 +229,7 @@ import {
 } from "../element/image";
 import throttle from "lodash.throttle";
 import { fileOpen, nativeFileSystemSupported } from "../data/filesystem";
+import _ from "lodash";
 
 const IsMobileContext = React.createContext(false);
 export const useIsMobile = () => useContext(IsMobileContext);
@@ -288,6 +289,9 @@ class App extends React.Component<AppProps, AppState> {
   public files: BinaryFiles = {};
   public imageCache: AppClassProperties["imageCache"] = new Map();
   user: User;
+
+  // shadown diff with latest scene, only for tracking
+  private latestSceneOverview?: any;
 
   constructor(props: AppProps) {
     super(props);
@@ -838,6 +842,7 @@ class App extends React.Component<AppProps, AppState> {
     }
 
     this.scene.addCallback(this.onSceneUpdated);
+    this.scene.addCallback(this.trackSceneUpdated);
     this.addEventListeners();
 
     if (this.excalidrawContainerRef.current) {
@@ -1581,6 +1586,24 @@ class App extends React.Component<AppProps, AppState> {
   private onSceneUpdated = () => {
     this.setState({});
   };
+
+  private buildSceneOvewview() {
+    const types = this.scene.getElements().map(e => e.type);
+    const counted = types.reduce((cur,e) => {
+      cur[e] = (cur[e] || 0) + 1;
+      return cur;
+    }, {} as any);
+    return {
+      stats: counted
+    }
+  }
+  private trackSceneUpdated = () => {
+    const sceneOverview = this.buildSceneOvewview();
+    if(!_.isEqual(this.latestSceneOverview, sceneOverview)) {
+      this.latestSceneOverview = sceneOverview;
+      trackEvent('scene', 'draw', {overview: sceneOverview});
+    }
+  }
 
   private updateCurrentCursorPosition = withBatchedUpdates(
     (event: MouseEvent) => {
