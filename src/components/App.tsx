@@ -230,6 +230,7 @@ import {
 import throttle from "lodash.throttle";
 import { fileOpen, nativeFileSystemSupported } from "../data/filesystem";
 import _ from "lodash";
+import { Footer } from "./Footer";
 
 const IsMobileContext = React.createContext(false);
 export const useIsMobile = () => useContext(IsMobileContext);
@@ -510,6 +511,7 @@ class App extends React.Component<AppProps, AppState> {
               />
             )}
             <main>{this.renderCanvas()}</main>
+            <Footer />
           </IsMobileContext.Provider>
         </ExcalidrawContainerContext.Provider>
       </div>
